@@ -1,0 +1,78 @@
+================================================================================
+ANÁLISIS LÉXICO - TOKENS ENCONTRADOS
+Archivo: input/ejemplo_errores.txt
+================================================================================
+TIPO                 LEXEMA                         LÍNEA      COLUMNA   
+--------------------------------------------------------------------------------
+PROC                 proc                           4          1         
+MAIN                 main                           4          6         
+LPAREN               (                              4          10        
+RPAREN               )                              4          11        
+LBRACE               {                              4          13        
+INT                  int                            5          5         
+ID                   x                              5          9         
+ASSIGN               =                              5          11        
+INT_LITERAL          10                             5          13        
+SEMICOLON            ;                              5          15        
+FLOAT                float                          6          5         
+ID                   y                              6          11        
+FLOAT_LITERAL        3.14                           6          15        
+SEMICOLON            ;                              6          19        
+BOOL                 bool                           7          5         
+ID                   flag                           7          10        
+ASSIGN               =                              7          15        
+TRUE                 true                           7          17        
+SEMICOLON            ;                              7          21        
+INT                  int                            10         5         
+ID                   mi_variable_123                10         9         
+ASSIGN               =                              10         25        
+INT_LITERAL          5                              10         27        
+SEMICOLON            ;                              10         28        
+INT                  int                            13         5         
+ID                   z                              13         9         
+ASSIGN               =                              13         11        
+INT_LITERAL          100                            13         13        
+INT_LITERAL          50                             13         19        
+SEMICOLON            ;                              13         21        
+STRING               string                         16         5         
+ID                   texto                          16         12        
+ASSIGN               =                              16         18        
+STRING_LITERAL       "Hello"                        16         20        
+SEMICOLON            ;                              16         27        
+ID                   Error                          16         31        
+COLON                :                              16         36        
+ID                   no                             16         40        
+ID                   es                             16         43        
+ID                   v                              16         46        
+ID                   lido                           16         48        
+IF                   if                             18         5         
+LPAREN               (                              18         8         
+ID                   x                              18         9         
+GEQ                  >=                             18         11        
+INT_LITERAL          10                             18         14        
+RPAREN               )                              18         16        
+LBRACE               {                              18         18        
+ID                   y                              19         9         
+ASSIGN               =                              19         11        
+ID                   y                              19         13        
+TIMES                *                              19         15        
+FLOAT_LITERAL        2.0                            19         17        
+SEMICOLON            ;                              19         20        
+RBRACE               }                              20         5         
+CHAR                 char                           23         5         
+ID                   c                              23         10        
+ASSIGN               =                              23         12        
+CHAR_LITERAL         'a'                            23         14        
+SEMICOLON            ;                              23         17        
+ID                   c                              24         5         
+ASSIGN               =                              24         7         
+ID                   c                              24         9         
+INT_LITERAL          1                              24         13        
+SEMICOLON            ;                              24         14        
+RETURN               return                         26         5         
+INT_LITERAL          0                              26         12        
+SEMICOLON            ;                              26         13        
+RBRACE               }                              27         1         
+--------------------------------------------------------------------------------
+Total de tokens encontrados: 69
+================================================================================
