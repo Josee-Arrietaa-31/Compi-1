@@ -1,0 +1,128 @@
+| Programa de ejemplo usando la nueva gramática
+| Lenguaje imperativo para configuración de chips
+
+є Este es un comentario
+  de múltiples líneas э
+
+| Variables globales
+world int contador endl
+world float temperatura = 25.5 endl
+world bool activo = true endl
+
+| Función para calcular potencia
+gift int potencia¿int base, int exponente?¡
+    local int resultado = 1 endl
+    local int i endl
+    
+    for ¿i = 0 endl i < exponente endl ++i?¡
+        resultado = resultado * base endl
+    !
+    
+    return resultado endl
+!
+
+| Función para verificar rango
+gift bool en_rango¿int valor, int min, int max?¡
+    decide of
+        ¿valor < min -> ¡
+            return false endl
+        !?
+        ¿valor > max -> ¡
+            return false endl
+        !?
+        ¿else -> ¡
+            return true endl
+        !?
+    end decide endl
+!
+
+| Función principal navidad
+coal navidad¿?¡
+    | Declaración de variables locales
+    local int x = 10 endl
+    local float y = 3.14 endl
+    local char codigo = 'A' endl
+    local string mensaje = "Sistema iniciado" endl
+    
+    | Arreglo bidimensional
+    local int matriz[3][3] = ¡0, 1, 2, 3, 4, 5, 6, 7, 8! endl
+    
+    | Mostrar mensaje
+    show¿mensaje? endl
+    show¿"Valor de x: "? endl
+    show¿x? endl
+    
+    | Leer valor
+    get¿x? endl
+    
+    | Expresiones aritméticas
+    x = ¿x + 5? * 2 endl
+    y = y ^ 2.0 endl
+    
+    | Operadores unarios
+    ++x endl
+    --x endl
+    x = -x endl
+    
+    | Estructura decide of
+    decide of
+        ¿x > 10 @ activo -> ¡
+            show¿"x es mayor que 10 y activo es true"? endl
+            x = x + 1 endl
+        !?
+        ¿x < 5 -> ¡
+            show¿"x es menor que 5"? endl
+        !?
+        ¿else -> ¡
+            show¿"Otro caso"? endl
+        !?
+    end decide endl
+    
+    | Estructura loop
+    loop
+        show¿x? endl
+        x = x - 1 endl
+        exit when x == 0 endl
+    end loop endl
+    
+    | For loop
+    local int i endl
+    for ¿i = 0 endl i < 10 endl ++i?¡
+        show¿i? endl
+        
+        decide of
+            ¿i == 5 -> ¡
+                break endl
+            !?
+        end decide endl
+    !
+    
+    | Operaciones con arreglos
+    matriz[0][0] = 100 endl
+    local int elemento = matriz[0][0] endl
+    show¿elemento? endl
+    
+    | Llamadas a funciones
+    local int resultado = potencia¿2, 8? endl
+    show¿resultado? endl
+    
+    local bool valido = en_rango¿x, 0, 100? endl
+    
+    decide of
+        ¿valido -> ¡
+            show¿"Valor válido"? endl
+        !?
+        ¿else -> ¡
+            show¿"Valor inválido"? endl
+        !?
+    end decide endl
+    
+    | Expresiones complejas
+    local bool condicion = ¿x > 0? @ ¿y < 10.0? ~ Σ¿z == 0? endl
+    
+    | División entera y decimal
+    local int div_entera = 10 // 3 endl  | Resultado: 3
+    local float div_decimal = 10.0 / 3.0 endl  | Resultado: 3.333...
+    
+    return endl
+!

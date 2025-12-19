@@ -1,0 +1,27 @@
+// Programa con errores léxicos intencionales
+// Para probar el manejo de errores en modo pánico
+
+proc main() {
+    int x = 10;
+    float y @ 3.14;  // Error: @ no es válido
+    bool flag = true;
+    
+    // Identificador válido
+    int mi_variable_123 = 5;
+    
+    // Error: caracteres no reconocidos
+    int z = 100 $ 50;  // Error: $ no es válido
+    
+    // Comentario válido con símbolo extraño después
+    string texto = "Hello"; # Error: # no es válido
+    
+    if (x >= 10) {
+        y = y * 2.0;
+    }
+    
+    // Más errores
+    char c = 'a';
+    c = c § 1;  // Error: § no es válido
+    
+    return 0;
+}
