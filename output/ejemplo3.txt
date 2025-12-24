@@ -1,0 +1,86 @@
+================================================================================
+ANÁLISIS LÉXICO - TOKENS ENCONTRADOS
+Archivo: input\ejemplo3.txt
+================================================================================
+TIPO                 LEXEMA                         LÍNEA      COLUMNA   
+--------------------------------------------------------------------------------
+GIFT                 gift                           7          1         
+INT                  int                            7          6         
+ID                   calcular_config                7          10        
+LPAREN               ¿                              7          26        
+INT                  int                            7          28        
+ID                   base                           7          32        
+COMMA                ,                              7          36        
+BOOL                 bool                           7          38        
+ID                   flag                           7          43        
+RPAREN               ?                              7          48        
+LBRACE               ¡                              8          1         
+LOCAL                local                          10         5         
+INT                  int                            10         11        
+ID                   ajuste                         10         15        
+ASSIGN               =                              10         22        
+INT_LITERAL          0                              10         24        
+ENDL                 endl                           10         26        
+SHOW                 show                           11         5         
+STRING_LITERAL       "Ingrese ajuste: "             11         10        
+ENDL                 endl                           11         29        
+GET                  get                            12         5         
+ID                   ajuste                         12         9         
+ENDL                 endl                           12         16        
+DECIDE               decide                         14         5         
+OF                   of                             14         12        
+LPAREN               ¿                              15         9         
+ID                   flag                           15         11        
+EQ                   ==                             15         16        
+TRUE                 true                           15         19        
+RPAREN               ?                              15         24        
+ARROW                ->                             15         26        
+LBRACE               ¡                              15         29        
+RETURN               return                         15         31        
+ID                   base                           15         38        
+PLUS                 +                              15         43        
+ID                   ajuste                         15         45        
+ENDL                 endl                           15         52        
+RBRACE               !                              15         57        
+ELSE                 else                           16         9         
+ARROW                ->                             16         14        
+LBRACE               ¡                              16         17        
+RETURN               return                         16         19        
+ID                   base                           16         26        
+ENDL                 endl                           16         31        
+RBRACE               !                              16         36        
+END                  end                            17         5         
+DECIDE               decide                         17         9         
+ENDL                 endl                           17         16        
+RBRACE               !                              18         1         
+GIFT                 gift                           21         1         
+COAL                 coal                           21         6         
+NAVIDAD              navidad                        21         11        
+LPAREN               ¿                              21         19        
+RPAREN               ?                              21         21        
+LBRACE               ¡                              22         1         
+LOCAL                local                          24         5         
+INT                  int                            24         11        
+ID                   resultado                      24         15        
+ASSIGN               =                              24         25        
+INT_LITERAL          0                              24         27        
+ENDL                 endl                           24         29        
+ID                   resultado                      27         5         
+ASSIGN               =                              27         15        
+ID                   calcular_config                27         17        
+LPAREN               ¿                              27         33        
+INT_LITERAL          100                            27         35        
+COMMA                ,                              27         38        
+TRUE                 true                           27         40        
+RPAREN               ?                              27         45        
+ENDL                 endl                           27         47        
+SHOW                 show                           28         5         
+STRING_LITERAL       "Resultado final: "            28         10        
+ENDL                 endl                           28         30        
+SHOW                 show                           29         5         
+ID                   resultado                      29         10        
+ENDL                 endl                           29         20        
+RBRACE               !                              30         1         
+--------------------------------------------------------------------------------
+Total de tokens encontrados: 77
+================================================================================

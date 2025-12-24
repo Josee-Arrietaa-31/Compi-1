@@ -1,0 +1,97 @@
+================================================================================
+ANÁLISIS LÉXICO - TOKENS ENCONTRADOS
+Archivo: input\ejemplo2.txt
+================================================================================
+TIPO                 LEXEMA                         LÍNEA      COLUMNA   
+--------------------------------------------------------------------------------
+GIFT                 gift                           3          1         
+COAL                 coal                           3          6         
+ID                   prueba_estructuras             3          11        
+LPAREN               ¿                              3          30        
+RPAREN               ?                              3          32        
+LBRACE               ¡                              4          1         
+LOCAL                local                          5          5         
+INT                  int                            5          11        
+ID                   i                              5          15        
+ASSIGN               =                              5          17        
+INT_LITERAL          0                              5          19        
+ENDL                 endl                           5          21        
+LOCAL                local                          6          5         
+BOOL                 bool                           6          11        
+ID                   activo                         6          16        
+ASSIGN               =                              6          23        
+TRUE                 true                           6          25        
+ENDL                 endl                           6          30        
+LOOP                 loop                           9          5         
+SHOW                 show                           10         9         
+STRING_LITERAL       "Iterando..."                  10         14        
+ENDL                 endl                           10         28        
+ID                   i                              11         9         
+INCREMENT            ++                             11         10        
+ENDL                 endl                           11         13        
+EXIT                 exit                           14         9         
+WHEN                 when                           14         14        
+LPAREN               ¿                              14         19        
+ID                   i                              14         21        
+GEQ                  >=                             14         23        
+INT_LITERAL          10                             14         26        
+RPAREN               ?                              14         29        
+ENDL                 endl                           14         31        
+END                  end                            15         5         
+LOOP                 loop                           15         9         
+ENDL                 endl                           15         14        
+FOR                  for                            18         5         
+LPAREN               ¿                              18         9         
+LOCAL                local                          18         11        
+INT                  int                            18         17        
+ID                   j                              18         21        
+ASSIGN               =                              18         23        
+INT_LITERAL          0                              18         25        
+ENDL                 endl                           18         27        
+ID                   j                              18         32        
+LT                   <                              18         34        
+INT_LITERAL          5                              18         36        
+ENDL                 endl                           18         38        
+ID                   j                              18         43        
+INCREMENT            ++                             18         44        
+RPAREN               ?                              18         47        
+LBRACE               ¡                              19         5         
+DECIDE               decide                         21         9         
+OF                   of                             21         16        
+LPAREN               ¿                              22         13        
+LPAREN               ¿                              22         15        
+ID                   j                              22         17        
+MOD                  %                              22         19        
+INT_LITERAL          2                              22         21        
+EQ                   ==                             22         23        
+INT_LITERAL          0                              22         26        
+RPAREN               ?                              22         28        
+AND                  @                              22         30        
+ID                   activo                         22         32        
+RPAREN               ?                              22         39        
+ARROW                ->                             22         41        
+LBRACE               ¡                              23         13        
+SHOW                 show                           24         17        
+STRING_LITERAL       "Par detectado"                24         22        
+ENDL                 endl                           24         38        
+BREAK                break                          25         17        
+ENDL                 endl                           25         23        
+RBRACE               !                              26         13        
+ELSE                 else                           27         13        
+ARROW                ->                             27         18        
+LBRACE               ¡                              28         13        
+SHOW                 show                           29         17        
+STRING_LITERAL       "Impar"                        29         22        
+ENDL                 endl                           29         30        
+RBRACE               !                              30         13        
+END                  end                            31         9         
+DECIDE               decide                         31         13        
+ENDL                 endl                           31         20        
+RBRACE               !                              32         5         
+RETURN               return                         34         5         
+COAL                 coal                           34         12        
+ENDL                 endl                           34         17        
+RBRACE               !                              35         1         
+--------------------------------------------------------------------------------
+Total de tokens encontrados: 88
+================================================================================

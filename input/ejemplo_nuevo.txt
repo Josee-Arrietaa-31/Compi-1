@@ -1,128 +1,100 @@
-| Programa de ejemplo usando la nueva gramática
-| Lenguaje imperativo para configuración de chips
+| --- Programa de configuración de chips optimizado ---
 
-є Este es un comentario
-  de múltiples líneas э
+є 
+  Este es un comentario de múltiples líneas 
+  que describe el programa. [cite: 111]
+э
 
-| Variables globales
+| b. Variables globales [cite: 73]
 world int contador endl
 world float temperatura = 25.5 endl
 world bool activo = true endl
 
-| Función para calcular potencia
-gift int potencia¿int base, int exponente?¡
+| q. Función para calcular potencia [cite: 108, 109]
+gift int potencia ¿ int base, int exponente ?
+¡
     local int resultado = 1 endl
-    local int i endl
+    local int i = 0 endl
     
-    for ¿i = 0 endl i < exponente endl ++i?¡
+    | o. Estructura for similar a C [cite: 100, 104]
+    for ¿ i = 0 endl i < exponente endl ++i ?
+    ¡
         resultado = resultado * base endl
     !
     
     return resultado endl
 !
 
-| Función para verificar rango
-gift bool en_rango¿int valor, int min, int max?¡
+| q. Función para verificar rango con tipos booleanos [cite: 108]
+gift bool en_rango ¿ int valor, int min, int max ?
+¡
+    | o. Estructura decide of correcta [cite: 93, 94, 98]
     decide of
-        ¿valor < min -> ¡
-            return false endl
-        !?
-        ¿valor > max -> ¡
-            return false endl
-        !?
-        ¿else -> ¡
-            return true endl
-        !?
+        valor < min -> ¡ return false endl !
+        valor > max -> ¡ return false endl !
+        else -> ¡ return true endl !
     end decide endl
 !
 
-| Función principal navidad
-coal navidad¿?¡
-    | Declaración de variables locales
+| r. Procedimiento inicial navidad (tipo coal) [cite: 110]
+gift coal navidad ¿ ?
+¡
+    | e. Creación de variables locales [cite: 77, 78]
     local int x = 10 endl
     local float y = 3.14 endl
     local char codigo = 'A' endl
     local string mensaje = "Sistema iniciado" endl
     
-    | Arreglo bidimensional
-    local int matriz[3][3] = ¡0, 1, 2, 3, 4, 5, 6, 7, 8! endl
+    | d. Arreglo bidimensional (3x3) [cite: 74, 75]
+    local int matriz[3][3] = ¡ 0, 1, 2, 3, 4, 5, 6, 7, 8 ! endl
     
-    | Mostrar mensaje
-    show¿mensaje? endl
-    show¿"Valor de x: "? endl
-    show¿x? endl
+    | p. Funciones de lectura y escritura [cite: 106, 107]
+    show mensaje endl
+    show "Valor de x inicial: " endl
+    show x endl
     
-    | Leer valor
-    get¿x? endl
+    get x endl
     
-    | Expresiones aritméticas
-    x = ¿x + 5? * 2 endl
+    | g, h. Expresiones aritméticas y paréntesis ¿ ? [cite: 80, 81]
+    x = ¿ x + 5 ? * 2 endl
     y = y ^ 2.0 endl
     
-    | Operadores unarios
+    | i. Operadores unarios antes del operando [cite: 83, 84]
     ++x endl
     --x endl
     x = -x endl
     
-    | Estructura decide of
-    decide of
-        ¿x > 10 @ activo -> ¡
-            show¿"x es mayor que 10 y activo es true"? endl
-            x = x + 1 endl
-        !?
-        ¿x < 5 -> ¡
-            show¿"x es menor que 5"? endl
-        !?
-        ¿else -> ¡
-            show¿"Otro caso"? endl
-        !?
-    end decide endl
-    
-    | Estructura loop
+    | o. Estructura loop tipo Ada [cite: 99, 101, 103]
     loop
-        show¿x? endl
+        show x endl
         x = x - 1 endl
         exit when x == 0 endl
     end loop endl
     
-    | For loop
-    local int i endl
-    for ¿i = 0 endl i < 10 endl ++i?¡
-        show¿i? endl
-        
+    | n. Combinación de expresiones y break [cite: 90, 104]
+    local int j = 0 endl
+    for ¿ j = 0 endl j < 10 endl ++j ?
+    ¡
         decide of
-            ¿i == 5 -> ¡
-                break endl
-            !?
+            j == 5 -> ¡ break endl !
         end decide endl
     !
     
-    | Operaciones con arreglos
+    | d. Modificación de elementos de arreglo [cite: 76]
     matriz[0][0] = 100 endl
     local int elemento = matriz[0][0] endl
-    show¿elemento? endl
+    show elemento endl
     
-    | Llamadas a funciones
-    local int resultado = potencia¿2, 8? endl
-    show¿resultado? endl
+    | q. Llamadas a funciones [cite: 108]
+    local int res_potencia = potencia ¿ 2, 8 ? endl
+    show res_potencia endl
     
-    local bool valido = en_rango¿x, 0, 100? endl
+    | k. Expresiones lógicas complejas (@, ~, Σ) 
+    local bool condicion = ¿ x > 0 ? @ ¿ y < 10.0 ? ~ Σ ¿ x == 0 ? endl
     
-    decide of
-        ¿valido -> ¡
-            show¿"Valor válido"? endl
-        !?
-        ¿else -> ¡
-            show¿"Valor inválido"? endl
-        !?
-    end decide endl
+    | h. División entera (//) y decimal (/) 
+    local int d_int = 10 // 3 endl
+    local float d_float = 10.0 / 3.0 endl
     
-    | Expresiones complejas
-    local bool condicion = ¿x > 0? @ ¿y < 10.0? ~ Σ¿z == 0? endl
-    
-    | División entera y decimal
-    local int div_entera = 10 // 3 endl  | Resultado: 3
-    local float div_decimal = 10.0 / 3.0 endl  | Resultado: 3.333...
-    
-    return endl
+    return coal endl
 !

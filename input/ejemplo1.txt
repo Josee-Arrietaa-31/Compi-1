@@ -1,87 +1,50 @@
-// Programa de ejemplo 1 - Configuración básica de chip
-// Declaración de procedimientos y método main
+| --- Prueba de Gramática: Puntos A - I ---
 
-proc configurar_pin(int pin, int modo) {
-    int registro = 0xFF00;
-    registro = registro | pin;
-    registro = registro & modo;
-    return registro;
-}
+| b. Variables globales
+world int configuracion_base = 100 endl
+world string nombre_chip = "Chip-X25" endl
 
-proc leer_sensor(int puerto) {
-    int valor = 0;
-    valor = puerto << 2;
-    valor = valor >> 1;
-    return valor;
-}
+| a. Creación de funciones (gift)
+| q. Retorno de valores y parámetros con ¿ ?
+gift int calcular_potencia ¿ int base, int exponente ?
+¡
+    | e. Variables locales y g. Uso de paréntesis ¿ ?
+    local int resultado = ¿ base ^ exponente ? endl
+    
+    | i. Operadores unarios ++ y --
+    resultado++ endl
+    
+    return resultado endl
+!
 
-proc main() {
-    // Declaración de variables
-    int pin1 = 13;
-    int pin2 = 7;
-    float temperatura = 25.5;
-    bool activo = true;
-    char codigo = 'A';
-    string mensaje = "Iniciando sistema";
+| r. Método principal (navidad) tipo coal
+gift coal navidad ¿ ?
+¡
+    | c. Tipos: int, float, bool, char, string
+    local int voltios = 5 endl
+    local float temperatura = 36.6 endl
+    local bool encendido = true endl
+    local char grupo = 'A' endl
     
-    // Operaciones aritméticas
-    int resultado = (pin1 + pin2) * 2;
-    resultado = resultado / 4;
-    resultado = resultado % 3;
+    | d. Arreglos (creación con asignación ¡ !)
+    local int matriz[2][2] = ¡ ¡ 1, 0 !, ¡ 0, 1 ! ! endl
     
-    // Operaciones lógicas y relacionales
-    if (pin1 > pin2 && activo) {
-        temperatura = temperatura + 1.5;
-    } else {
-        temperatura = temperatura - 0.5;
-    }
+    | --- Prueba de Divisiones (Punto H) ---
+    local int resultado_entero = 10 // 3 endl    
+    local float resultado_decimal = 10 / 3 endl  
+
+    | j. Expresiones relacionales y lógicas (@, ~, Σ)
+    decide of
+        ¿ ¿ temperatura >= 40.0 ? @ Σ encendido ? ->
+        ¡
+            show "Alerta: Sobrecalentamiento" endl
+        !
+        else ->
+        ¡
+            | i. Negativo unario
+            voltios = -1 endl
+        !
+    end decide endl
     
-    // Bucles
-    int contador = 0;
-    while (contador < 10) {
-        contador = contador + 1;
-        
-        if (contador == 5) {
-            break;
-        }
-    }
-    
-    // For loop
-    int i = 0;
-    for (i = 0; i < 5; i = i + 1) {
-        resultado = resultado + i;
-    }
-    
-    // Switch case
-    switch (pin1) {
-        case 10:
-            resultado = 100;
-            break;
-        case 13:
-            resultado = 130;
-            break;
-        default:
-            resultado = 0;
-    }
-    
-    // Operaciones de bits
-    int mascara = 0xFF;
-    int binario = 0b11110000;
-    int hex = 0xABCD;
-    
-    mascara = mascara & binario;
-    mascara = mascara | hex;
-    mascara = mascara ^ 0x0F;
-    mascara = ~mascara;
-    
-    // Llamadas a procedimientos
-    int config = configurar_pin(pin1, 0b0011);
-    int lectura = leer_sensor(pin2);
-    
-    // Do-while
-    do {
-        lectura = lectura + 1;
-    } while (lectura < 100);
-    
-    return 0;
-}
+    return coal endl
+!

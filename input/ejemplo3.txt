@@ -1,0 +1,27 @@
+| --- Prueba de Gramática: Puntos P - S ---
+
+| q. Creación de funciones con gift y parámetros
+gift int calcular_config ¿ int base, bool flag ?
+¡
+    | p. Función de lectura
+    local int ajuste = 0 endl
+    show "Ingrese ajuste: " endl
+    get ajuste endl
+    
+    decide of
+        ¿ flag == true ? -> ¡ return base + ajuste endl !
+        else -> ¡ return base endl !
+    end decide endl
+!
+
+| r. Procedimiento inicial único (navidad) tipo coal
+gift coal navidad ¿ ?
+¡
+    | s. Comentario de una línea
+    local int resultado = 0 endl
+    
+    | q. Llamada a función y p. Escritura
+    resultado = calcular_config ¿ 100, true ? endl
+    show "Resultado final: " endl
+    show resultado endl
+!

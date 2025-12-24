@@ -1,0 +1,35 @@
+| --- Prueba de Gramática: Puntos M - O ---
+
+gift coal prueba_estructuras ¿ ?
+¡
+    local int i = 0 endl
+    local bool activo = true endl
+
+    | o. Estructura Loop (Tipo Ada)
+    loop
+        show "Iterando..." endl
+        i++ endl
+        
+        | exit when condicion endl
+        exit when ¿ i >= 10 ? endl
+    end loop endl
+
+    | o. Estructura For (Tipo C/Java)
+    for ¿ local int j = 0 endl j < 5 endl j++ ?
+    ¡
+        | m. Combinación de expresiones y n. Tipado fuerte
+        decide of
+            ¿ ¿ j % 2 == 0 ? @ activo ? ->
+            ¡
+                show "Par detectado" endl
+                break endl | o. Uso de break
+            !
+            else ->
+            ¡
+                show "Impar" endl
+            !
+        end decide endl
+    !
+
+    return coal endl | o. Uso de return
+!

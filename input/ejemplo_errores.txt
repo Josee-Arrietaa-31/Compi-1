@@ -1,27 +1,22 @@
-// Programa con errores léxicos intencionales
-// Para probar el manejo de errores en modo pánico
+| --- Prueba de Errores Léxicos ---
 
-proc main() {
-    int x = 10;
-    float y @ 3.14;  // Error: @ no es válido
-    bool flag = true;
+gift coal navidad ¿ ?
+¡
+    | 1. Caracteres no permitidos (pueden disparar errores léxicos)
+    local int valor = 100 # endl   | El caracter '#' no existe en la gramática
+    local float dato = 5.5 $ endl  | El caracter '$' no existe en la gramática
     
-    // Identificador válido
-    int mi_variable_123 = 5;
+    | 2. Error en números mal formados (si tu regex es estricta)
+    local float mal_formado = 5.5.5 endl 
     
-    // Error: caracteres no reconocidos
-    int z = 100 $ 50;  // Error: $ no es válido
+    | 3. Uso de operadores no definidos
+    local int calculo = 10 & 2 endl  | El símbolo '&' no es conjunción (@)
     
-    // Comentario válido con símbolo extraño después
-    string texto = "Hello"; # Error: # no es válido
+    | 4. Cadenas de texto sin cerrar
+    show "Este mensaje nunca termina endl
     
-    if (x >= 10) {
-        y = y * 2.0;
-    }
+    | 5. Identificadores con caracteres ilegales
+    local int variable_@_error = 10 endl
     
-    // Más errores
-    char c = 'a';
-    c = c § 1;  // Error: § no es válido
-    
-    return 0;
-}
+    return coal endl
+!
