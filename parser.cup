@@ -1,0 +1,486 @@
+/* Parser Cup para Lenguaje Imperativo de Configuración de Chips */
+/* Gramática BNF Completa */
+
+import java_cup.runtime.*;
+import java.util.*;
+
+parser code {:
+    public void syntax_error(Symbol cur_token) {
+        report_error("Error de sintaxis en línea " + (cur_token.left) + 
+                     ", columna " + (cur_token.right), null);
+    }
+    
+    public void unrecovered_syntax_error(Symbol cur_token) throws Exception {
+        report_fatal_error("Error de sintaxis irrecuperable", null);
+    }
+:};
+
+/* ========== TERMINALES ========== */
+
+/* Tipos de datos */
+terminal String INT, FLOAT, BOOL, CHAR, STRING, COAL;
+
+/* Palabras reservadas - Variables y funciones */
+terminal String WORLD, LOCAL, GIFT;
+
+/* Estructuras de control */
+terminal String DECIDE, OF, END, ELSE;
+terminal String LOOP, EXIT, WHEN;
+terminal String FOR, BREAK, RETURN;
+
+/* Método principal */
+terminal String NAVIDAD;
+
+/* Entrada/Salida */
+terminal String SHOW, GET;
+
+/* Valores booleanos */
+terminal String TRUE, FALSE;
+
+/* Operadores relacionales */
+terminal String EQ, NEQ, LT, GT, LEQ, GEQ;
+
+/* Operadores lógicos */
+terminal String AND, OR, NOT;
+
+/* Operadores aritméticos */
+terminal String PLUS, MINUS, TIMES, DIV, DIV_INT, MOD, POW;
+terminal String INCREMENT, DECREMENT;
+terminal String ASSIGN;
+
+/* Delimitadores */
+terminal String LPAREN, RPAREN;      // ¿ ?
+terminal String LBRACE, RBRACE;      // ¡ !
+terminal String LBRACKET, RBRACKET;  // [ ]
+terminal String ENDL;                // endl
+terminal String COMMA;               // ,
+terminal String ARROW;               // ->
+
+/* Literales e identificadores */
+terminal String INT_LITERAL, FLOAT_LITERAL;
+terminal String STRING_LITERAL, CHAR_LITERAL;
+terminal String HEX_LITERAL, BINARY_LITERAL;
+terminal String ID;
+
+/* ========== NO TERMINALES ========== */
+
+non terminal programa;
+non terminal List<Object> declaraciones;
+non terminal Object declaracion;
+non terminal Object declaracion_global;
+non terminal Object declaracion_funcion;
+non terminal Object funcion_navidad;
+
+/* Tipos */
+non terminal String tipo;
+non terminal String tipo_arreglo;
+
+/* Variables globales y locales */
+non terminal Object variable_global;
+non terminal Object variable_local;
+non terminal Object declaracion_arreglo;
+
+/* Parámetros */
+non terminal List<Object> lista_parametros;
+non terminal List<Object> lista_parametros_ne;
+non terminal Object parametro;
+
+/* Bloque y sentencias */
+non terminal List<Object> bloque;
+non terminal List<Object> sentencias;
+non terminal Object sentencia;
+
+/* Estructuras de control */
+non terminal Object decide_of;
+non terminal List<Object> decide_casos;
+non terminal Object decide_caso;
+non terminal Object decide_else;
+non terminal Object loop_stmt;
+non terminal Object for_stmt;
+non terminal Object for_init;
+non terminal Object for_update;
+
+/* Expresiones */
+non terminal Object expresion;
+non terminal Object expresion_logica;
+non terminal Object expresion_relacional;
+non terminal Object expresion_aritmetica;
+non terminal Object termino;
+non terminal Object factor;
+non terminal Object unario;
+non terminal Object primario;
+
+/* Llamadas a funciones */
+non terminal Object llamada_funcion;
+non terminal List<Object> lista_argumentos;
+non terminal List<Object> lista_argumentos_ne;
+
+/* Acceso a arreglos */
+non terminal Object acceso_arreglo;
+
+/* Entrada/Salida */
+non terminal Object show_stmt;
+non terminal Object get_stmt;
+
+/* ========== PRECEDENCIA Y ASOCIATIVIDAD ========== */
+
+precedence left OR;
+precedence left AND;
+precedence right NOT;
+precedence left EQ, NEQ;
+precedence left LT, GT, LEQ, GEQ;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIV, DIV_INT, MOD;
+precedence right POW;
+precedence right INCREMENT, DECREMENT;
+precedence left LBRACKET;
+
+/* ========== GRAMÁTICA ========== */
+
+start with programa;
+
+/* Programa principal */
+programa ::= 
+    declaraciones:d
+    {:
+        System.out.println("Programa parseado correctamente");
+        System.out.println("Total de declaraciones: " + (d != null ? d.size() : 0));
+    :}
+    ;
+
+declaraciones ::=
+    declaraciones:d declaracion:dec
+    {:
+        if (d == null) d = new ArrayList<>();
+        d.add(dec);
+        RESULT = d;
+    :}
+    | declaracion:dec
+    {:
+        List<Object> l = new ArrayList<>();
+        l.add(dec);
+        RESULT = l;
+    :}
+    ;
+
+declaracion ::=
+    declaracion_global:d {: RESULT = d; :}
+    | declaracion_funcion:d {: RESULT = d; :}
+    | funcion_navidad:d {: RESULT = d; :}
+    ;
+
+/* Variables globales */
+declaracion_global ::=
+    WORLD tipo:t ID:id ENDL
+    {: RESULT = "VarGlobal: " + t + " " + id; :}
+    | WORLD tipo:t ID:id ASSIGN expresion:e ENDL
+    {: RESULT = "VarGlobal: " + t + " " + id + " = " + e; :}
+    | WORLD declaracion_arreglo:a ENDL
+    {: RESULT = "ArregloGlobal: " + a; :}
+    ;
+
+/* Declaración de arreglos */
+declaracion_arreglo ::=
+    tipo:t ID:id LBRACKET INT_LITERAL:n1 RBRACKET LBRACKET INT_LITERAL:n2 RBRACKET
+    {: RESULT = t + " " + id + "[" + n1 + "][" + n2 + "]"; :}
+    | tipo:t ID:id LBRACKET INT_LITERAL:n1 RBRACKET LBRACKET INT_LITERAL:n2 RBRACKET 
+      ASSIGN LBRACE lista_argumentos:l RBRACE
+    {: RESULT = t + " " + id + "[" + n1 + "][" + n2 + "] = {...}"; :}
+    ;
+
+/* Función principal navidad */
+funcion_navidad ::=
+    COAL NAVIDAD LPAREN RPAREN LBRACE bloque:b RBRACE
+    {: RESULT = "Navidad() { ... }"; :}
+    ;
+
+/* Declaración de funciones */
+declaracion_funcion ::=
+    GIFT tipo:t ID:id LPAREN lista_parametros:p RPAREN LBRACE bloque:b RBRACE
+    {: RESULT = "Funcion: " + t + " " + id + "() { ... }"; :}
+    ;
+
+/* Parámetros */
+lista_parametros ::=
+    lista_parametros_ne:l {: RESULT = l; :}
+    | /* vacío */ {: RESULT = new ArrayList<>(); :}
+    ;
+
+lista_parametros_ne ::=
+    lista_parametros_ne:l COMMA parametro:p
+    {:
+        l.add(p);
+        RESULT = l;
+    :}
+    | parametro:p
+    {:
+        List<Object> l = new ArrayList<>();
+        l.add(p);
+        RESULT = l;
+    :}
+    ;
+
+parametro ::=
+    tipo:t ID:id
+    {: RESULT = t + " " + id; :}
+    ;
+
+/* Tipos */
+tipo ::=
+    INT:t {: RESULT = t; :}
+    | FLOAT:t {: RESULT = t; :}
+    | BOOL:t {: RESULT = t; :}
+    | CHAR:t {: RESULT = t; :}
+    | STRING:t {: RESULT = t; :}
+    ;
+
+/* Bloque de código */
+bloque ::=
+    sentencias:s {: RESULT = s; :}
+    | /* vacío */ {: RESULT = new ArrayList<>(); :}
+    ;
+
+sentencias ::=
+    sentencias:s sentencia:st
+    {:
+        if (s == null) s = new ArrayList<>();
+        s.add(st);
+        RESULT = s;
+    :}
+    | sentencia:st
+    {:
+        List<Object> l = new ArrayList<>();
+        l.add(st);
+        RESULT = l;
+    :}
+    ;
+
+/* Sentencias */
+sentencia ::=
+    variable_local:v {: RESULT = v; :}
+    | ID:id ASSIGN expresion:e ENDL
+    {: RESULT = id + " = " + e; :}
+    | acceso_arreglo:a ASSIGN expresion:e ENDL
+    {: RESULT = a + " = " + e; :}
+    | expresion:e ENDL
+    {: RESULT = e; :}
+    | decide_of:d {: RESULT = d; :}
+    | loop_stmt:l {: RESULT = l; :}
+    | for_stmt:f {: RESULT = f; :}
+    | show_stmt:s {: RESULT = s; :}
+    | get_stmt:g {: RESULT = g; :}
+    | RETURN expresion:e ENDL
+    {: RESULT = "return " + e; :}
+    | RETURN ENDL
+    {: RESULT = "return"; :}
+    | BREAK ENDL
+    {: RESULT = "break"; :}
+    ;
+
+/* Variables locales */
+variable_local ::=
+    LOCAL tipo:t ID:id ENDL
+    {: RESULT = "local " + t + " " + id; :}
+    | LOCAL tipo:t ID:id ASSIGN expresion:e ENDL
+    {: RESULT = "local " + t + " " + id + " = " + e; :}
+    | LOCAL declaracion_arreglo:a ENDL
+    {: RESULT = "local " + a; :}
+    ;
+
+/* Estructura decide of */
+decide_of ::=
+    DECIDE OF decide_casos:c decide_else:e END DECIDE ENDL
+    {: RESULT = "decide of { ... }"; :}
+    | DECIDE OF decide_casos:c END DECIDE ENDL
+    {: RESULT = "decide of { ... }"; :}
+    ;
+
+decide_casos ::=
+    decide_casos:cs decide_caso:c
+    {:
+        if (cs == null) cs = new ArrayList<>();
+        cs.add(c);
+        RESULT = cs;
+    :}
+    | decide_caso:c
+    {:
+        List<Object> l = new ArrayList<>();
+        l.add(c);
+        RESULT = l;
+    :}
+    ;
+
+decide_caso ::=
+    LPAREN expresion:e ARROW LBRACE bloque:b RBRACE RPAREN
+    {: RESULT = "caso: (" + e + " -> {...})"; :}
+    ;
+
+decide_else ::=
+    LPAREN ELSE ARROW LBRACE bloque:b RBRACE RPAREN
+    {: RESULT = "else -> {...}"; :}
+    ;
+
+/* Estructura loop */
+loop_stmt ::=
+    LOOP sentencias:s1 EXIT WHEN expresion:e ENDL sentencias:s2 END LOOP ENDL
+    {: RESULT = "loop { ... exit when " + e + " ... }"; :}
+    | LOOP sentencias:s EXIT WHEN expresion:e ENDL END LOOP ENDL
+    {: RESULT = "loop { ... exit when " + e + " }"; :}
+    | LOOP EXIT WHEN expresion:e ENDL sentencias:s END LOOP ENDL
+    {: RESULT = "loop { exit when " + e + " ... }"; :}
+    | LOOP EXIT WHEN expresion:e ENDL END LOOP ENDL
+    {: RESULT = "loop { exit when " + e + " }"; :}
+    ;
+
+/* Estructura for */
+for_stmt ::=
+    FOR LPAREN for_init:i expresion:c ENDL for_update:u RPAREN LBRACE bloque:b RBRACE
+    {: RESULT = "for(...) { ... }"; :}
+    ;
+
+for_init ::=
+    tipo:t ID:id ASSIGN expresion:e ENDL
+    {: RESULT = t + " " + id + " = " + e; :}
+    | ID:id ASSIGN expresion:e ENDL
+    {: RESULT = id + " = " + e; :}
+    ;
+
+for_update ::=
+    ID:id ASSIGN expresion:e
+    {: RESULT = id + " = " + e; :}
+    | INCREMENT ID:id
+    {: RESULT = "++" + id; :}
+    | DECREMENT ID:id
+    {: RESULT = "--" + id; :}
+    ;
+
+/* Entrada/Salida */
+show_stmt ::=
+    SHOW LPAREN expresion:e RPAREN ENDL
+    {: RESULT = "show(" + e + ")"; :}
+    ;
+
+get_stmt ::=
+    GET LPAREN ID:id RPAREN ENDL
+    {: RESULT = "get(" + id + ")"; :}
+    ;
+
+/* Expresiones */
+expresion ::=
+    expresion_logica:e {: RESULT = e; :}
+    ;
+
+expresion_logica ::=
+    expresion_logica:e1 AND expresion_relacional:e2
+    {: RESULT = e1 + " @ " + e2; :}
+    | expresion_logica:e1 OR expresion_relacional:e2
+    {: RESULT = e1 + " ~ " + e2; :}
+    | NOT expresion_relacional:e
+    {: RESULT = "Σ" + e; :}
+    | expresion_relacional:e
+    {: RESULT = e; :}
+    ;
+
+expresion_relacional ::=
+    expresion_aritmetica:e1 LT expresion_aritmetica:e2
+    {: RESULT = e1 + " < " + e2; :}
+    | expresion_aritmetica:e1 GT expresion_aritmetica:e2
+    {: RESULT = e1 + " > " + e2; :}
+    | expresion_aritmetica:e1 LEQ expresion_aritmetica:e2
+    {: RESULT = e1 + " <= " + e2; :}
+    | expresion_aritmetica:e1 GEQ expresion_aritmetica:e2
+    {: RESULT = e1 + " >= " + e2; :}
+    | expresion_aritmetica:e1 EQ expresion_aritmetica:e2
+    {: RESULT = e1 + " == " + e2; :}
+    | expresion_aritmetica:e1 NEQ expresion_aritmetica:e2
+    {: RESULT = e1 + " != " + e2; :}
+    | expresion_aritmetica:e
+    {: RESULT = e; :}
+    ;
+
+expresion_aritmetica ::=
+    expresion_aritmetica:e1 PLUS termino:e2
+    {: RESULT = e1 + " + " + e2; :}
+    | expresion_aritmetica:e1 MINUS termino:e2
+    {: RESULT = e1 + " - " + e2; :}
+    | termino:e
+    {: RESULT = e; :}
+    ;
+
+termino ::=
+    termino:e1 TIMES factor:e2
+    {: RESULT = e1 + " * " + e2; :}
+    | termino:e1 DIV factor:e2
+    {: RESULT = e1 + " / " + e2; :}
+    | termino:e1 DIV_INT factor:e2
+    {: RESULT = e1 + " // " + e2; :}
+    | termino:e1 MOD factor:e2
+    {: RESULT = e1 + " % " + e2; :}
+    | factor:e
+    {: RESULT = e; :}
+    ;
+
+factor ::=
+    unario:e1 POW factor:e2
+    {: RESULT = e1 + " ^ " + e2; :}
+    | unario:e
+    {: RESULT = e; :}
+    ;
+
+unario ::=
+    MINUS unario:e
+    {: RESULT = "-" + e; :}
+    | INCREMENT ID:id
+    {: RESULT = "++" + id; :}
+    | DECREMENT ID:id
+    {: RESULT = "--" + id; :}
+    | primario:e
+    {: RESULT = e; :}
+    ;
+
+primario ::=
+    INT_LITERAL:n {: RESULT = n; :}
+    | FLOAT_LITERAL:n {: RESULT = n; :}
+    | HEX_LITERAL:n {: RESULT = n; :}
+    | BINARY_LITERAL:n {: RESULT = n; :}
+    | STRING_LITERAL:s {: RESULT = s; :}
+    | CHAR_LITERAL:c {: RESULT = c; :}
+    | TRUE:b {: RESULT = b; :}
+    | FALSE:b {: RESULT = b; :}
+    | ID:id {: RESULT = id; :}
+    | llamada_funcion:f {: RESULT = f; :}
+    | acceso_arreglo:a {: RESULT = a; :}
+    | LPAREN expresion:e RPAREN
+    {: RESULT = "(" + e + ")"; :}
+    ;
+
+/* Llamada a función */
+llamada_funcion ::=
+    ID:id LPAREN lista_argumentos:args RPAREN
+    {: RESULT = id + "(...)"; :}
+    ;
+
+lista_argumentos ::=
+    lista_argumentos_ne:l {: RESULT = l; :}
+    | /* vacío */ {: RESULT = new ArrayList<>(); :}
+    ;
+
+lista_argumentos_ne ::=
+    lista_argumentos_ne:l COMMA expresion:e
+    {:
+        l.add(e);
+        RESULT = l;
+    :}
+    | expresion:e
+    {:
+        List<Object> l = new ArrayList<>();
+        l.add(e);
+        RESULT = l;
+    :}
+    ;
+
+/* Acceso a arreglo */
+acceso_arreglo ::=
+    ID:id LBRACKET expresion:e1 RBRACKET LBRACKET expresion:e2 RBRACKET
+    {: RESULT = id + "[" + e1 + "][" + e2 + "]"; :}
+    ;

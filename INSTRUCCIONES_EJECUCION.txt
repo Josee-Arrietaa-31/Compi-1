@@ -1,0 +1,222 @@
+================================================================================
+         INSTRUCCIONES PARA EJECUTAR EL ANALIZADOR LÉXICO
+================================================================================
+
+PROYECTO: Analizador Léxico para Lenguaje de Configuración de Chips
+HERRAMIENTAS: JFlex, Cup, Java
+
+================================================================================
+1. COMPILAR EL PROYECTO (Solo la primera vez o después de cambios)
+================================================================================
+
+Ejecutar el archivo batch de compilación:
+
+    compilar.bat
+
+Esto generará:
+    - src/Scanner.java (desde scanner.flex)
+    - src/sym.java (desde parser.cup)
+    - src/parser.java (desde parser.cup)
+    - Archivos .class compilados
+
+================================================================================
+2. EJECUTAR EL ANALIZADOR LÉXICO
+================================================================================
+
+OPCIÓN A - Usando el script (Recomendado):
+------------------------------------------
+
+    ejecutar.bat input\ejemplo_nuevo.txt
+
+    ejecutar.bat input\ejemplo_nuevo.txt output\mi_salida.txt
+
+
+OPCIÓN B - Comando directo de Java:
+----------------------------------
+
+    java -cp "lib/java-cup-11b-runtime.jar;." Main input/ejemplo_nuevo.txt
+
+    java -cp "lib/java-cup-11b-runtime.jar;." Main input/ejemplo_nuevo.txt output/tokens.txt
+
+
+================================================================================
+3. ARCHIVOS DE EJEMPLO DISPONIBLES
+================================================================================
+
+input\ejemplo_nuevo.txt     - Programa completo con la gramática nueva
+                              (world, local, gift, navidad, decide of, etc.)
+
+input\simple.txt            - Programa simple para pruebas rápidas
+
+input\ejemplo_errores.txt   - Programa con errores léxicos intencionales
+                              para probar la recuperación en modo pánico
+
+================================================================================
+4. VER LOS RESULTADOS
+================================================================================
+
+Los tokens se guardan en: output\tokens.txt (por defecto)
+
+Para ver el contenido:
+
+    type output\tokens.txt
+
+    Get-Content output\tokens.txt
+
+
+================================================================================
+5. FORMATO DE SALIDA
+================================================================================
+
+El archivo de salida contiene:
+
+    TIPO                 LEXEMA                         LÍNEA      COLUMNA
+    ------------------------------------------------------------------------
+    WORLD                world                          8          1
+    INT                  int                            8          7
+    ID                   contador                       8          11
+    ENDL                 endl                           8          20
+    ...
+
+Información incluida:
+    - TIPO: Clasificación del token (INT, FLOAT, ID, WORLD, etc.)
+    - LEXEMA: Texto exacto encontrado en el código fuente
+    - LÍNEA: Número de línea donde aparece
+    - COLUMNA: Posición en la línea
+
+================================================================================
+6. MANEJO DE ERRORES
+================================================================================
+
+Si el archivo tiene errores léxicos:
+    - Se imprimirán en pantalla con línea y columna
+    - El análisis continuará procesando el resto del archivo
+    - Los tokens válidos se guardarán en el archivo de salida
+
+Ejemplo de error:
+    Error léxico en línea 6, columna 13: Carácter no reconocido: '@'
+
+================================================================================
+7. CREAR TU PROPIO ARCHIVO DE PRUEBA
+================================================================================
+
+Crea un archivo .txt en la carpeta input\ con código del lenguaje.
+
+Ejemplo de código válido:
+
+    world int x endl
+    world float temperatura = 25.5 endl
+    
+    gift int suma¿int a, int b?¡
+        return a + b endl
+    !
+    
+    coal navidad¿?¡
+        local int resultado = suma¿5, 10? endl
+        show¿resultado? endl
+        return endl
+    !
+
+Luego ejecuta:
+    ejecutar.bat input\mi_archivo.txt
+
+================================================================================
+8. TOKENS RECONOCIDOS POR EL SCANNER
+================================================================================
+
+PALABRAS RESERVADAS:
+    world, local, gift, coal, navidad
+    decide, of, end, else, loop, exit, when, for, break, return
+    show, get
+    int, float, bool, char, string
+    true, false
+
+OPERADORES ARITMÉTICOS:
+    +, -, *, /, //, %, ^, ++, --
+
+OPERADORES RELACIONALES:
+    <, >, <=, >=, ==, !=
+
+OPERADORES LÓGICOS:
+    @ (AND), ~ (OR), Σ (NOT)
+
+DELIMITADORES:
+    ¿ ? (paréntesis)
+    ¡ ! (llaves)
+    [ ] (corchetes)
+    endl (fin de sentencia)
+    -> (flecha para decide of)
+    , (coma)
+
+LITERALES:
+    123 (entero decimal)
+    3.14 (flotante)
+    0xFF (hexadecimal)
+    0b1010 (binario)
+    "texto" (cadena)
+    'c' (carácter)
+
+COMENTARIOS:
+    | Comentario de una línea
+    є Comentario de
+      múltiples líneas э
+
+================================================================================
+9. ESTRUCTURA DEL PROYECTO
+================================================================================
+
+Proyecto#1/
+├── scanner.flex           - Especificación JFlex del analizador léxico
+├── parser.cup             - Especificación Cup para símbolos
+├── compilar.bat           - Script para compilar el proyecto
+├── ejecutar.bat           - Script para ejecutar el analizador
+├── README.md              - Documentación del proyecto
+├── src/
+│   ├── Main.java          - Programa principal
+│   ├── Scanner.java       - Generado por JFlex
+│   ├── sym.java           - Generado por Cup
+│   └── parser.java        - Generado por Cup
+├── lib/
+│   ├── jflex-full-1.9.1.jar
+│   ├── java-cup-11b.jar
+│   └── java-cup-11b-runtime.jar
+├── input/                 - Archivos de código fuente
+└── output/                - Archivos de salida con tokens
+
+================================================================================
+10. SOLUCIÓN DE PROBLEMAS
+================================================================================
+
+PROBLEMA: "java no se reconoce como comando"
+SOLUCIÓN: Asegúrate de tener Java instalado y configurado en el PATH
+          Variables de entorno en esta sesión:
+          $env:JAVA_HOME = "C:\Users\josea\jdk-25\jdk-25.0.1"
+          $env:Path = "$env:JAVA_HOME\bin;$env:Path"
+
+PROBLEMA: "No se encuentra el archivo"
+SOLUCIÓN: Verifica que el archivo existe en la carpeta input/
+          Usa la ruta correcta: input\archivo.txt
+
+PROBLEMA: "Error al cargar librerías"
+SOLUCIÓN: Verifica que los archivos JAR estén en la carpeta lib/
+          Ejecuta desde la carpeta raíz del proyecto
+
+PROBLEMA: Muchos errores léxicos
+SOLUCIÓN: Verifica que tu código use la sintaxis correcta del lenguaje
+          Revisa los ejemplos en input/ejemplo_nuevo.txt
+
+================================================================================
+11. RECOMPILAR DESPUÉS DE CAMBIOS
+================================================================================
+
+Si modificas scanner.flex o parser.cup:
+
+    1. Ejecuta: compilar.bat
+    2. Verifica que no haya errores
+    3. Ejecuta tu programa de prueba
+
+================================================================================
+
+Para más información, consulta el archivo README.md
+
+================================================================================
